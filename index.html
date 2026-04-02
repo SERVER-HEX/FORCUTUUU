@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>For My Dearest Shri - I'm Truly Sorry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* subtle, keeps text from being selected accidentally, but okay */
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #2b1a2f 0%, #1e1224 100%);
+            font-family: 'Segoe UI', 'Dancing Script', 'Poppins', 'Quicksand', system-ui, -apple-system, 'Roboto', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* falling petals / hearts animation background (gentle) */
+        .bg-love {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-love i {
+            position: absolute;
+            font-style: normal;
+            font-size: 1.3rem;
+            opacity: 0.3;
+            animation: floatLove linear infinite;
+            color: #ffb7c5;
+        }
+
+        @keyframes floatLove {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* main card */
+        .apology-card {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 245, 250, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 68px 68px 78px 78px;
+            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 220, 240, 0.5);
+            padding: 2rem 1.8rem 2.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: gentleAppear 1s ease-out;
+        }
+
+        @keyframes gentleAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.96) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .heart-icon {
+            font-size: 4.5rem;
+            animation: heartbeat 1.4s infinite ease;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 4px 8px rgba(219, 79, 119, 0.3));
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.18); }
+            35% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c44569, #e84393);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            font-family: 'Dancing Script', 'Segoe UI', cursive;
+        }
+
+        .greeting {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #5e2a47;
+            margin-bottom: 1rem;
+            border-bottom: 2px dashed #ffa5c3;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        .message {
+            font-size: 1.18rem;
+            line-height: 1.5;
+            color: #3c2a33;
+            background: rgba(255, 245, 250, 0.7);
+            padding: 1rem 1.2rem;
+            border-radius: 48px;
+            margin: 1.4rem 0;
+            font-weight: 500;
+            backdrop-filter: blur(2px);
+            box-shadow: inset 0 0 5px #ffe2f0, 0 8px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .sorry-list {
+            text-align: left;
+            background: #fff0f5c9;
+            border-radius: 48px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            list-style-type: none;
+        }
+
+        .sorry-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            margin: 0.8rem 0;
+            color: #4a2c3b;
+            font-weight: 500;
+        }
+
+        .sorry-list li::before {
+            content: "💔";
+            font-size: 1.3rem;
+        }
+
+        .special-plea {
+            background: #ffe3f0;
+            border-radius: 60px;
+            padding: 1rem 1rem;
+            margin: 1.4rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #b13e6b;
+            border: 1px solid #ffbfd5;
+        }
+
+        .special-plea span {
+            display: inline-block;
+            animation: gentleShake 1.8s infinite;
+        }
+
+        @keyframes gentleShake {
+            0%,100%{ transform: translateX(0); }
+            50%{ transform: translateX(3px); }
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .btn {
+            background: #ff9ebb;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            color: #2c1020;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-pink {
+            background: #ff85ae;
+            color: white;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .btn-pink:hover {
+            background: #ff6f9e;
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e88aaa;
+            color: #b2436b;
+        }
+
+        .btn-outline:hover {
+            background: #ffeef4;
+            border-color: #e65f8b;
+        }
+
+        .music-bar {
+            margin-top: 1.8rem;
+            background: #ffffffc9;
+            border-radius: 100px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .music-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .music-control button {
+            background: #f3cddf;
+            border: none;
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #4f2b3c;
+        }
+
+        .music-control button:hover {
+            background: #f5b7cf;
+        }
+
+        .status-text {
+            font-size: 0.75rem;
+            color: #9e6f83;
+        }
+
+        .footer {
+            margin-top: 1.8rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            color: #ad7e96;
+        }
+
+        @media (max-width: 500px) {
+            .apology-card {
+                padding: 1.5rem 1.2rem 2rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .message {
+                font-size: 0.95rem;
+            }
+            .btn {
+                padding: 8px 20px;
+                font-size: 0.95rem;
+            }
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body>
+
+<!-- floating hearts background -->
+<div class="bg-love" id="bgLove"></div>
+
+<div class="apology-card">
+    <div class="heart-icon">❤️‍🩹❤️</div>
+    <h1>My Dearest Shri</h1>
+    <div class="greeting">✨ You mean the world to me ✨</div>
+
+    <div class="message">
+        I'm deeply sorry for every single moment I made you sad, every tear I caused, and every time I let you down.  
+        You are the most precious part of my life, and the thought of losing you breaks me completely.
+    </div>
+
+    <ul class="sorry-list">
+        <li>For all the silly arguments I started</li>
+        <li>For every time I didn't listen with my whole heart</li>
+        <li>For hurting your feelings when you only deserved love</li>
+        <li>For my mistakes, my ego, and my careless words</li>
+        <li>For every time I made you feel alone</li>
+    </ul>
+
+    <div class="special-plea">
+        <span>💗 Shri, I'm sorry for everything 💗</span><br>
+        Please don't leave me. I promise to be better, every single day. You are my home.
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-pink" id="forgiveBtn">💖 I'm Sorry, Forgive Me 💖</button>
+        <button class="btn btn-outline" id="promiseBtn">🤞 I Promise to Change 🤞</button>
+    </div>
+
+    <!-- background music player (m.mp3) -->
+    <div class="music-bar">
+        <div class="music-control">
+            <span>🎵 Background melody</span>
+            <button id="playMusicBtn">▶ Play</button>
+            <button id="pauseMusicBtn">⏸ Pause</button>
+        </div>
+        <div class="status-text" id="musicStatus">🎧 loading song ...</div>
+    </div>
+    <div class="footer">
+        For you, Shri — every heartbeat whispers your name. I love you.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- Background music: m.mp3 ----------
+        // Using an audio element that tries to load "m.mp3" from same directory as HTML.
+        // If file not found, we show error gracefully and user can still experience page.
+        // To ensure autoplay policies: browsers block autoplay with audio unless user interaction.
+        // We'll attempt to play on first user click anywhere, plus we give play button.
+        const audio = new Audio();
+        // set the source to "m.mp3" (exact filename as requested)
+        audio.src = "m.mp3";
+        audio.loop = true;
+        audio.preload = "auto";
+        audio.volume = 0.65;   // pleasant background volume
+
+        const playBtn = document.getElementById("playMusicBtn");
+        const pauseBtn = document.getElementById("pauseMusicBtn");
+        const musicStatusSpan = document.getElementById("musicStatus");
+
+        // Helper to update status text
+        function setMusicStatus(text, isError = false) {
+            musicStatusSpan.innerHTML = text;
+            if(isError) {
+                musicStatusSpan.style.color = "#c95c7c";
+            } else {
+                musicStatusSpan.style.color = "#9e6f83";
+            }
+        }
+
+        // Check if audio can play, handle errors
+        audio.addEventListener("canplaythrough", () => {
+            if(!audio.paused) {
+                setMusicStatus("🎶 playing m.mp3 ...");
+            } else {
+                setMusicStatus("🎵 ready to play");
+            }
+        });
+        
+        audio.addEventListener("error", (e) => {
+            console.warn("Audio error: could not load m.mp3", e);
+            setMusicStatus("⚠️ music file not found (m.mp3) but my love remains true ⚠️", true);
+            playBtn.disabled = false;   // still clickable but might not work, but we keep it.
+        });
+
+        audio.addEventListener("play", () => {
+            setMusicStatus("🎶 now playing ~ sorry melody ~");
+        });
+        
+        audio.addEventListener("pause", () => {
+            setMusicStatus("⏸ music paused");
+        });
+
+        // manual play function with error handling
+        function playMusic() {
+            audio.play().then(() => {
+                // success
+            }).catch(err => {
+                console.log("Playback failed:", err);
+                if(err.name === "NotAllowedError") {
+                    setMusicStatus("🔊 tap anywhere to allow audio first", false);
+                    // we also set a one-time global interaction to try again.
+                } else if (err.name === "NotSupportedError") {
+                    setMusicStatus("❌ m.mp3 format not supported", true);
+                } else {
+                    setMusicStatus("⚠️ couldn't play m.mp3", true);
+                }
+            });
+        }
+
+        playBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            playMusic();
+        });
+        
+        pauseBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            audio.pause();
+        });
+
+        // Because autoplay policies are strict, we will also try to start music on first user interaction (any button, card touch)
+        // but we also want to ensure background music can start without requiring explicit play click if user taps forgive/promise.
+        // We'll attach a one-time global document click/touch to try playing if audio is still paused and not yet interacted.
+        let hasUserInteracted = false;
+        function attemptAutoplayOnInteraction() {
+            if(hasUserInteracted) return;
+            hasUserInteracted = true;
+            if(audio.paused && audio.src && !audio.ended) {
+                audio.play().catch(e => {
+                    // still fine, user can press play button anyway
+                    console.log("auto start blocked, use play button");
+                    setMusicStatus("🔊 click play to hear apology melody", false);
+                });
+            }
+        }
+        
+        // listen to any click on important elements, or whole body
+        document.body.addEventListener("click", attemptAutoplayOnInteraction, { once: true });
+        // also make forgive and promise buttons trigger it
+        const forgiveBtn = document.getElementById("forgiveBtn");
+        const promiseBtn = document.getElementById("promiseBtn");
+        
+        forgiveBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            attemptAutoplayOnInteraction(); // ensure music might start if not started
+            // extra sweet alert effect + floating hearts
+            createFloatingMessage("💖 I love you Shri 💖");
+            // animate the special plea
+            const specialDiv = document.querySelector(".special-plea");
+            specialDiv.style.transform = "scale(1.02)";
+            setTimeout(() => { specialDiv.style.transform = ""; }, 300);
+            // also create additional note
+            showTemporaryToast("You mean everything to me, Shri. I'll never stop trying.");
+        });
+        
+        promiseBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            attemptAutoplayOnInteraction();
+            createFloatingMessage("🤞 I promise, for you 🤞");
+            const card = document.querySelector(".apology-card");
+            card.style.boxShadow = "0 0 0 3px #ffb7d2, 0 25px 40px rgba(0,0,0,0.3)";
+            setTimeout(() => { card.style.boxShadow = ""; }, 400);
+            showTemporaryToast("Every day I'll be the man you deserve. Never leaving your side.");
+        });
+
+        // Helper: small floating toast
+        function showTemporaryToast(msg) {
+            let toast = document.createElement("div");
+            toast.innerText = msg;
+            toast.style.position = "fixed";
+            toast.style.bottom = "30px";
+            toast.style.left = "50%";
+            toast.style.transform = "translateX(-50%)";
+            toast.style.backgroundColor = "#ffd9e8";
+            toast.style.color = "#b13e6b";
+            toast.style.padding = "10px 22px";
+            toast.style.borderRadius = "50px";
+            toast.style.fontWeight = "bold";
+            toast.style.fontSize = "0.9rem";
+            toast.style.zIndex = "999";
+            toast.style.boxShadow = "0 5px 15px rgba(0,0,0,0.2)";
+            toast.style.backdropFilter = "blur(8px)";
+            toast.style.fontFamily = "inherit";
+            toast.style.border = "1px solid #ff9ebb";
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => toast.remove(), 500);
+            }, 2300);
+        }
+        
+        // create floating hearts or 'sorry' messages on click
+        function createFloatingMessage(text) {
+            for(let i=0; i<8; i++) {
+                let el = document.createElement("div");
+                el.innerText = i % 2 === 0 ? "❤️" : "💕";
+                if(text === "💖 I love you Shri 💖") {
+                    el.innerText = "💖";
+                } else if (text === "🤞 I promise, for you 🤞") {
+                    el.innerText = "🤞💕";
+                } else {
+                    el.innerText = ["😢", "💗", "🌸", "✨"][Math.floor(Math.random()*4)];
+                }
+                el.style.position = "fixed";
+                el.style.fontSize = (1.2 + Math.random() * 1.5) + "rem";
+                el.style.left = Math.random() * window.innerWidth + "px";
+                el.style.bottom = "-20px";
+                el.style.pointerEvents = "none";
+                el.style.zIndex = "9999";
+                el.style.opacity = "0.9";
+                el.style.transition = "all 3s ease-out";
+                document.body.appendChild(el);
+                let duration = 2000 + Math.random() * 2000;
+                let endX = (Math.random() - 0.5) * 100;
+                requestAnimationFrame(() => {
+                    el.style.transform = `translateX(${endX}px) translateY(-${window.innerHeight + 80}px) rotate(${Math.random() * 360}deg)`;
+                    el.style.opacity = "0";
+                });
+                setTimeout(() => el.remove(), duration);
+            }
+        }
+
+        // generate dynamic background floating hearts (gentle)
+        function generateFloatingBackground() {
+            const container = document.getElementById("bgLove");
+            container.innerHTML = "";
+            const heartSymbols = ["❤️", "💖", "🌸", "💕", "💓", "🌷", "✨"];
+            for(let i=0; i<55; i++) {
+                let heartSpan = document.createElement("i");
+                heartSpan.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                let size = 0.8 + Math.random() * 1.2;
+                heartSpan.style.fontSize = size + "rem";
+                heartSpan.style.left = Math.random() * 100 + "%";
+                heartSpan.style.animationDuration = 8 + Math.random() * 12 + "s";
+                heartSpan.style.animationDelay = Math.random() * 15 + "s";
+                heartSpan.style.opacity = 0.2 + Math.random() * 0.4;
+                container.appendChild(heartSpan);
+            }
+        }
+        generateFloatingBackground();
+        window.addEventListener("resize", () => generateFloatingBackground()); // re-adjust on resize
+
+        // extra special message: ensure that 'dont leave me' is prominently shown
+        const pleaDiv = document.querySelector(".special-plea");
+        if(pleaDiv) {
+            // Add extra emphasis for don't leave me
+            let dontLeaveSpan = document.createElement("div");
+            dontLeaveSpan.style.marginTop = "8px";
+            dontLeaveSpan.style.fontSize = "1.25rem";
+            dontLeaveSpan.style.fontWeight = "800";
+            dontLeaveSpan.style.color = "#e34178";
+            dontLeaveSpan.innerHTML = "🤍 Please don't leave me, Shri 🤍";
+            pleaDiv.appendChild(dontLeaveSpan);
+        }
+        
+        // preload audio hint - try to load metadata
+        audio.load();
+        
+        // also manually set status once page ready
+        window.addEventListener("load", () => {
+            if(audio.readyState >= 2) {
+                setMusicStatus("🎵 ready, press play");
+            } else {
+                setMusicStatus("🔊 waiting for m.mp3 (tap to play)");
+            }
+            // small extra animation to show care
+            const title = document.querySelector("h1");
+            title.style.transition = "0.3s";
+            setInterval(() => {
+                if(Math.random() > 0.7) {
+                    title.style.textShadow = "0 0 5px #ffb7c5";
+                    setTimeout(() => title.style.textShadow = "", 500);
+                }
+            }, 2000);
+        });
+
+        // ensure that if there's any silent error with audio we still display a loving reminder
+        // also an extra message to make GF feel special - dynamic counter message?
+        // adds a tiny timer with a loving quote
+        const quotes = [
+            "You are my sunrise on dark days.",
+            "Without you, my world is colorless.",
+            "I'll hold you forever if you let me.",
+            "Every sorry comes from the deepest part of me.",
+            "Shri, you are my greatest blessing."
+        ];
+        let idx = 0;
+        setInterval(() => {
+            const footerEl = document.querySelector(".footer");
+            if(footerEl && !footerEl.querySelector(".quote-rotate")) {
+                let quoteSpan = footerEl.querySelector(".dynamic-quote");
+                if(!quoteSpan) {
+                    quoteSpan = document.createElement("div");
+                    quoteSpan.className = "dynamic-quote";
+                    quoteSpan.style.marginTop = "8px";
+                    quoteSpan.style.fontSize = "0.7rem";
+                    quoteSpan.style.fontStyle = "italic";
+                    footerEl.appendChild(quoteSpan);
+                }
+                quoteSpan.innerText = `✨ "${quotes[idx % quotes.length]}" ✨`;
+                idx++;
+            } else {
+                let existing = footerEl?.querySelector(".dynamic-quote");
+                if(existing) existing.innerText = `✨ "${quotes[idx % quotes.length]}" ✨`;
+                idx++;
+            }
+        }, 6000);
+        
+        // add a visual note about not leaving
+        const note = document.createElement("div");
+        note.style.position = "fixed";
+        note.style.bottom = "12px";
+        note.style.right = "12px";
+        note.style.fontSize = "11px";
+        note.style.background = "#ffecf0aa";
+        note.style.padding = "5px 10px";
+        note.style.borderRadius = "50px";
+        note.style.backdropFilter = "blur(5px)";
+        note.style.color = "#b3416e";
+        note.style.zIndex = "20";
+        note.innerText = "💌 I'm sorry for everything. Stay with me 💌";
+        document.body.appendChild(note);
+        setTimeout(() => {
+            note.style.opacity = "0.8";
+        }, 100);
+    })();
+</script>
+</body>
+</html>
